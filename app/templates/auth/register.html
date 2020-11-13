@@ -9,13 +9,30 @@
       {% endfor %}
   </div>  -->
 
-  <div class='errors'>
-    {% for messages in get_flashed_messages() %}
-      <div class="alert alert-danger" role="alert">{{ messages }}</div>
-    {% endfor %}
-  </div>
+    <!-- Email field errors -->
+    <div class="errors">
+      {% for errors in form.email.errors %}
+      <div class="alert alert-danger" role="alert">{{ errors }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Name field errors -->
+    <div class="errors">
+      {% for errors in form.name.errors %}
+      <div class="alert alert-danger" role="alert">{{ errors }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Password field errors -->
+    <div class="errors">
+      {% for errors in form.password.errors %}
+      <div class="alert alert-danger" role="alert">{{ errors }}</div>
+      {% endfor %}
+    </div>
+
   <div class="form">
       <form method="POST" action="{{ url_for('auth.register') }}">
+        {{ form.hidden_tag() }}
 
         <div class="form-group">
           <label for="exampleInputEmail1">Email</label>
@@ -23,8 +40,8 @@
         </div>
 
         <div class="form-group">
-          <label for="exampleInputPassword1">Username</label>
-          {{ form.name(class="form-control", id="exampleInputPassword1", placeholder="Enter your username") }}
+          <label for="exampleInputName">Username</label>
+          {{ form.name(class="form-control", id="exampleInputName", placeholder="Enter your username") }}
         </div>
 
         <div class="form-group">
