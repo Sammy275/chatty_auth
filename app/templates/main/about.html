@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock title %}
+
+{% block content %}
+<div class="container">
+        <div class="text-justify mt-4">
+            <h2>Reason Behind Chatty</h2>
+            <hr>
+            <p>Every skill based worker needs a portfolio that they can show off as to prove their skills. As a web development student, I have always worried about the outside market. I do not have a complete confidence in my skills and I do not know how much I know.</p>
+            <p>Chatty will work as a proof for my skills and also as something that I can show off to other people. This is a time taking project but I have people who have been guiding me and supporting me. This is not just my hardwork. There is other people's support behind this project</p>
+            <p>Chatty is a portfolio. This is in no way a commercial product on which I would want to earn on. This is a learning project that I will grow as time goes on. It will nourish as I learn more and more.</p>
+        </div>
+    <hr> 
+    
+    <div class="img-panel">
+        <h2>Some Cool Pictures, Just for Fun</h2>
+        <div class="row mt-4">
+            <div class="col-md-4 mt-2">
+                <img src="{{ url_for('static', filename='pic1.jpg') }}" class="img-fluid" alt="Intro Image">
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <img src="{{ url_for('static', filename='pic2.jpg') }}" class="img-fluid" alt="Intro Image">
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <img src="{{ url_for('static', filename='pic3.jpg') }}" class="img-fluid" alt="Intro Image">
+            </div>
+        </div>
+    </div>
+
+    <div class="about">
+        <h2>About Me</h2>
+        <p>Hello, my name is Saim Irfan and I am in a learning process. This is just a humble beginning. A very humble start</p>
+        <h3>My Socials</h3>
+        <ul class="list-unstyled social-links">
+            <li><a href="https://github.com/Sammy275/" target="#">Github</a></li>
+            <li><a href="https://www.facebook.com/saim.irfan.275/" target="#">Facebook</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock content %}

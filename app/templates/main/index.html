@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4 intro">
+        <div class="col-md-4 text-justify">
+            <h2>About Chatty</h2>
+            <hr>
+            <p>Chaaty is an online chatting application, it is simple is that. Make an account and find people based on your interest, location and so much more. Main goal of Chatty is that you have the best online interaction with people on the internet.</p>
+        </div>
+
+        <div class="col-md-8 text-md-center">
+            <img src="{{ url_for('static', filename='intro.jpg') }}" class="ml-md-4 img-fluid" alt="Intro Image">
+        </div>
+    </div>
+    <hr> 
+    
+    <div class="guide">
+        <h2>How to Use Chatty</h2>
+        <div class="text-justify">
+            <p>Chatty is a chat based application that requires a user account in order to chat with other people. Makinga new account is an easy process. Click on the "Make Account Button". You will be taken to form where you have to fill out the necessary information.</p>
+            <p>Once you have made an acount, it is recommended that you go to the settings and add information about yourself. This information is necessary for other people to find you. Make sure you add your interests, location. This will help you in finding people and vice versa.</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

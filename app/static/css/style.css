@@ -1,0 +1,171 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+h2, h3 {
+    color: #40c2ff;
+}
+
+p {
+    font-weight: 400;
+    font-size: 120%;
+    line-height: 1.5;
+}
+
+hr {
+    border-bottom: 1px solid grey;
+}
+
+.nav-custom {
+    background-color: #40c2ff;
+}
+
+.nav-custom a {
+    color: #080808 !important;
+}
+
+.nav-custom a:hover {
+    color: #e5ff00 !important;
+}
+
+.account-but {
+    background-color: #e5ff00;
+    color: #000000 !important;
+    font-weight: 600;
+    padding: 5px;
+    width: 100%;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.account-but:hover {
+    background-color: #40c2ff;
+}
+
+.intro, .guide{
+    padding: 20px;
+}
+
+.img-panel img, .intro img, .form {
+    box-shadow: 10px 10px 10px grey;
+}
+
+.about {
+    margin-top: 25px;
+}
+
+
+.form {
+    position: relative;
+    top: 100px;
+    background-color: #40c2ff;
+    width: 75%;
+    margin: 0px auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 10px;
+}
+
+.social-links a {
+    color: #000000;
+    font-weight: 600;
+    font-size: 1.2em;
+    line-height: 250%;
+}
+
+.errors {
+    margin-top: 10px;
+}
+
+
+.side-nav {
+    border: 1px solid #969696;
+    margin-left: 10px;
+    height: 300px;
+}
+
+.info-form {
+    background-color: #40c2ff;
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 10px;
+}
+
+.additional-text {
+    width: 50%;
+    margin: 20px auto;
+}
+
+.additional-text p {
+    line-height: 1;
+    font-size: 100;
+}
+
+.additional-info {
+    word-wrap: break-word;
+}
+
+.detail p {
+    line-height: 0.5;   
+    font-size: 110%;
+    color: #8f8f8f;
+    font-size: 100;
+}
+
+.friend-list {
+    margin: 20px auto;
+    padding: 20px;
+    width: 50%;
+    border: 2px solid #e5ff00;
+}
+
+.friend-list p {
+    line-height: normal;
+}
+
+.friend-detail {
+    width: 50%;
+    float: left;
+}
+
+.friend-detail a {
+    text-decoration: none;
+}
+
+.friend-detail p {
+    color: #8f8f8f;
+}
+
+.display-pic {
+    float: right;
+    width: 50%;
+    text-align: center;
+}
+
+.display-pic img {
+    width: 50%;
+    height: 80px;
+}
+
+/* .friend-list button {
+    width:% !important;
+} */
+
+@media (max-width: 768px) { 
+    .side-nav {
+        height: 100%;
+        margin-bottom: 25px;
+    }
+
+    .friend-list {
+        width: 100%;
+    }
+ }
+
+ /* @media (max-width: 600px) { 
+    .friend-list {
+        width: 100%;
+    }
+ } */
