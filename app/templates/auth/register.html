@@ -8,6 +8,12 @@
       <div class="alert alert-danger" role="alert">{{ error }}</div>
       {% endfor %}
   </div>  -->
+
+  <div class='errors'>
+    {% for messages in get_flashed_messages() %}
+      <div class="alert alert-danger" role="alert">{{ messages }}</div>
+    {% endfor %}
+  </div>
   <div class="form">
       <form method="POST" action="{{ url_for('auth.register') }}">
 
