@@ -28,6 +28,17 @@ class User(db.Model, UserMixin):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    @property
+    def user_age(self):
+        return self.age
+    
+    @user_age.setter
+    def user_age(self, year):
+        curr_date = str(datetime.date.today()).split('-')
+        print(curr_date)
+        self.age = int(curr_date[0]) - int(year)
+
+
 @login_manager.user_loader
 def loaduser(user_id):
     return User.query.get(int(user_id))

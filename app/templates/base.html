@@ -42,6 +42,11 @@
         </nav>
     </div>
     {% endblock nav %}
+    
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endfor %}
+        
     {% block content %}{% endblock content %}
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
