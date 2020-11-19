@@ -1,5 +1,5 @@
 from flask import render_template, request, flash, redirect, url_for
-from flask_login import logout_user, login_required, login_user
+from flask_login import logout_user, login_required, login_user, current_user
 from . import auth
 from app.auth.forms import RegisterForm, LoginForm
 from ..models import User
@@ -7,6 +7,10 @@ from app import db
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        flash("Please log out to log-in to a new account")
+        return redirect(url_for('main.index'))
+    
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email = form.email.data).first()
