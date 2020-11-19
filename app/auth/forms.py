@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, SubmitField
+from wtforms import StringField, PasswordField, SelectField, SubmitField, BooleanField
 from wtforms.validators import Length, Email, DataRequired, Regexp, EqualTo
 from wtforms.fields.html5 import EmailField
 import datetime
@@ -19,3 +19,9 @@ class RegisterForm(FlaskForm):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('Email is already registered.')
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[Email(), DataRequired(), Length(1, 64)])
+    password = PasswordField("Password", validators=[DataRequired()])
+    remember_me = BooleanField('Keep me Logged In')
+    submit = SubmitField("Log in")
