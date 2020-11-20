@@ -20,6 +20,10 @@ class RegisterForm(FlaskForm):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('Email is already registered.')
 
+    def validate_name(self, field):
+        if User.query.filter_by(name=field.data).first():
+            raise ValidationError('The username is taken')
+
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[Email(), DataRequired(), Length(1, 64)])
     password = PasswordField("Password", validators=[DataRequired()])
