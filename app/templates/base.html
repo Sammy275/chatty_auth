@@ -25,7 +25,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
                     </li>
-                    {% if not session %}
+                    {% if not current_user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.login') }}">Sign In</a>
                     </li>
