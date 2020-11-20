@@ -28,8 +28,8 @@ def register():
         user = User(email=form.email.data, name=form.name.data, password=form.password.data, user_age=form.year.data)
         db.session.add(user)
         db.session.commit()
-        flash("You are now registered")
-        return redirect(url_for('main.index'))
+        flash("You are registered. Now you can log in to your account")
+        return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
 
 @auth.route('/logout')
