@@ -34,6 +34,10 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link account-but" href="#">Your Chat</a>
                     </li>
                     {% endif %}
