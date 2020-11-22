@@ -1,3 +1,5 @@
+import os
+
 class Config:
     SECRET_KEY = 'You cannot guess me suckker'
 
@@ -9,11 +11,14 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:mysqliscrazyman@localhost/chatty'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+    FLASK_MAIL_SUBJECT_PREFIX = '[Chatty]'
+    FLASK_MAIL_SENDER = 'Chatty Admin <chatty@example.com>'
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = 'samfan95@gmail.com'
-    MAIL_PASSWORD = 'ilovepakistan'
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') 'zdsvxnorbtaehnuw'
 
 class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:mysqliscrazyman@localhost/chatty_test'
