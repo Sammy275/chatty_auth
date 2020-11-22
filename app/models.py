@@ -43,7 +43,6 @@ class User(db.Model, UserMixin):
     @user_age.setter
     def user_age(self, year):
         curr_date = str(datetime.date.today()).split('-')
-        print(curr_date)
         self.age = int(curr_date[0]) - int(year)
 
     # user account confirmation
