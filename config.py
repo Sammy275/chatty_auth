@@ -18,7 +18,7 @@ class DevelopmentConfig(Config):
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') 'zdsvxnorbtaehnuw'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
 class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:mysqliscrazyman@localhost/chatty_test'
