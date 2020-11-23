@@ -1,7 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import logout_user, login_required, login_user, current_user
 from . import auth
-from app.auth.forms import RegisterForm, LoginForm
+from app.auth.forms import RegisterForm, LoginForm, PasswordUpdateForm
 from ..models import User
 from app import db
 from ..emails import send_email
@@ -94,4 +94,16 @@ def resend_confirmation():
     send_email(current_user.email, 'Confirm Your Account', 'auth/email/confirm', user=current_user, token=token)
     flash('A new confirmation email has been sent to you by email.')
     return redirect(url_for('main.index'))
-#########################################################################3
+#########################################################################
+
+
+
+####################### Account Management ############################### 
+@auth.route('/update-password', methods=['GET', 'POST'])
+@login_required
+def update_password():
+    form = PasswordUpdateForm()
+    return render_template('auth/update_password.html', form=form)
+
+
+##########################################################################
