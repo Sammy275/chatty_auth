@@ -41,3 +41,16 @@ class PasswordUpdateForm(FlaskForm):
     def validate_old_password(self, field):
         if not current_user.verify_password(field.data):
             raise ValidationError("Incorrect Password")
+
+class ForgotPasswordEmailForm(FlaskForm):
+    email = StringField('Email', validators=[Email(), DataRequired(), Length(1, 64)])
+    submit = SubmitField("Send Reset Link")
+
+    def validate_email(self, field):
+        if not User.query.filter_by(email=field.data).first():
+            raise ValidationError('The given email does not exist in database')
+
+class ForgotPasswordChangeForm(FlaskForm):
+    new_password = PasswordField("Password", validators=[DataRequired(), EqualTo('confirm_pass', message='Password must match')])
+    confirm_pass = PasswordField("Confirm Password", validators=[DataRequired()])
+    submit = SubmitField("Change Password")
