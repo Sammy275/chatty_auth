@@ -1,7 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import logout_user, login_required, login_user, current_user
 from . import auth
-from app.auth.forms import RegisterForm, LoginForm, PasswordUpdateForm
+from app.auth.forms import RegisterForm, LoginForm, PasswordUpdateForm, ForgotPasswordEmailForm, ForgotPasswordChangeForm
 from ..models import User
 from app import db
 from ..emails import send_email
@@ -99,7 +99,7 @@ def resend_confirmation():
 
 
 ####################### Account Management ############################### 
-@auth.route('/update-password', methods=['GET', 'POST'])
+@auth.route('/update_password', methods=['GET', 'POST'])
 @login_required
 def update_password():
     form = PasswordUpdateForm()
@@ -110,6 +110,39 @@ def update_password():
         flash("Your password has been updated")
         return redirect(url_for('main.index'))
     return render_template('auth/update_password.html', form=form)
+
+@auth.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    # If user is logged in then take them to main page
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+        
+    form = ForgotPasswordEmailForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        token = user.generate_confirmation_token()
+        send_email(form.email.data, 'Change Password', 'auth/email/change_password_email', user=user, token=token)
+        flash("A reset link has been sent to your email account")
+        return redirect(url_for('auth.login'))
+    return render_template('auth/forgot_password.html', form=form)
+
+@auth.route('/change_password/<email>/<token>', methods=['GET', 'POST'])
+def change_password(email, token):
+    form = ForgotPasswordChangeForm()
+    user = User.query.filter_by(email=email).first()
+        
+    if form.validate_on_submit():
+        user.password = form.new_password.data
+        db.session.add(user)
+        db.session.commit()
+        flash("Password has been changed. You can now log in")
+        return redirect(url_for('auth.login'))
+    
+    
+    if user.confirm(token):
+        return render_template('/auth/change_password.html', form=form, email=email, token=token)
+    flash("Link is invalid or has expired")
+    return redirect(url_for('auth.login'))
 
 
 ##########################################################################
