@@ -103,6 +103,12 @@ def resend_confirmation():
 @login_required
 def update_password():
     form = PasswordUpdateForm()
+    if form.validate_on_submit():
+        current_user.password = form.new_password.data
+        db.session.add(current_user)
+        db.session.commit()
+        flash("Your password has been updated")
+        return redirect(url_for('main.index'))
     return render_template('auth/update_password.html', form=form)
 
 
