@@ -11,8 +11,11 @@ def before_request():
     if current_user.is_authenticated and not current_user.confirmed and request.endpoint[:5] != 'auth.':
         return redirect(url_for('auth.unconfirmed'))
 
+# Login route
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    # If a user, who has already logged in, tries to acces the route
     if current_user.is_authenticated:
         flash("Please log out to log-in to a new account")
         return redirect(url_for('main.index'))
@@ -20,12 +23,15 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email = form.email.data).first()
+
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             flash('You have been logged in')
             return redirect(request.args.get('next') or url_for('main.index'))
         flash('Invalid Username or Password')
     return render_template('auth/login.html', form=form)
+
+# Registration route
 
 @auth.route('/register', methods=["GET", "POST"])
 def register():
@@ -34,14 +40,17 @@ def register():
         user = User(email=form.email.data, name=form.name.data, password=form.password.data, user_age=form.year.data)
         db.session.add(user)
         db.session.commit()
+        
         token = user.generate_confirmation_token()
-
         send_email(user.email, 'Confirm Your Account', 'auth/email/confirm', user=user, token=token)
 
         flash("A confirmation email has been sent to your email. Please check it")
         return redirect(url_for('main.index'))
 
     return render_template('auth/register.html', form=form)
+
+
+# User account confirmation route
 
 @auth.route('/confirm/<token>')
 @login_required
@@ -55,11 +64,15 @@ def confirm(token):
         flash("The confirmation link is invalid or has expired")
     return redirect(url_for('main.index'))
 
+# If the user account is unconfirmed, this route will be executed
+
 @auth.route('/unconfirmed')
 def unconfirmed():
     if current_user.is_anonymous or current_user.confirmed:
         return redirect(url_for('main.index'))
     return render_template('auth/unconfirmed.html')
+
+# Route to generate new confirmation token
 
 @auth.route('/confirm')
 @login_required
@@ -69,6 +82,8 @@ def resend_confirmation():
     flash('A new confirmation email has been sent to you by email.')
     return redirect(url_for('main.index'))
 
+
+# Route that will log out the user
 @auth.route('/logout')
 @login_required
 def logout():
