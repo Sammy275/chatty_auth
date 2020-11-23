@@ -11,6 +11,8 @@ def before_request():
     if current_user.is_authenticated and not current_user.confirmed and request.endpoint[:5] != 'auth.':
         return redirect(url_for('auth.unconfirmed'))
 
+
+###################### User Authentication ##########################################
 # Login route
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -50,6 +52,17 @@ def register():
     return render_template('auth/register.html', form=form)
 
 
+# Route that will log out the user
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You have been logged out")
+    return redirect(url_for('main.index'))
+#############################################################################################
+
+
+##################### User account confirmations #################################
 # User account confirmation route
 
 @auth.route('/confirm/<token>')
@@ -81,12 +94,4 @@ def resend_confirmation():
     send_email(current_user.email, 'Confirm Your Account', 'auth/email/confirm', user=current_user, token=token)
     flash('A new confirmation email has been sent to you by email.')
     return redirect(url_for('main.index'))
-
-
-# Route that will log out the user
-@auth.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    flash("You have been logged out")
-    return redirect(url_for('main.index'))
+#########################################################################3
