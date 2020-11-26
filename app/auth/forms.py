@@ -54,3 +54,7 @@ class ForgotPasswordChangeForm(FlaskForm):
     new_password = PasswordField("Password", validators=[DataRequired(), EqualTo('confirm_pass', message='Password must match')])
     confirm_pass = PasswordField("Confirm Password", validators=[DataRequired()])
     submit = SubmitField("Change Password")
+
+class ChangeEmailForm(FlaskForm):
+    new_email = StringField('Email', validators=[Email(), DataRequired(), Length(1, 64)])
+    submit = SubmitField("Change Email")
