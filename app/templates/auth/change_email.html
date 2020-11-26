@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Change Email{% endblock title %}
+
+{% block content %}
+<div class="container">
+
+    <!-- Email field errors -->
+    <div class="errors">
+      {% for errors in form.new_email.errors %}
+      <div class="alert alert-danger" role="alert">{{ errors }}</div>
+      {% endfor %}
+    </div>
+
+  <div class="form">
+      <form method="POST" action="{{ url_for('auth.change_email') }}">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Your New Email</label>
+            {{ form.new_email(class='form-control', id='exampleInputEmail1', placeholder='Enter your new email') }}
+        </div>
+
+        <!-- <button type="submit" class="btn account-but">Sign Up</button> -->
+        {{ form.submit(class='btn account-but') }}
+      </form>
+      <small>A confirmation link will be sent to your email. Click that link, so that the email can be changed</small>
+  </div>
+</div>
+{% endblock content %}
