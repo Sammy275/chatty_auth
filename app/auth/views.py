@@ -1,7 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import logout_user, login_required, login_user, current_user
 from . import auth
-from app.auth.forms import RegisterForm, LoginForm, PasswordUpdateForm, ForgotPasswordEmailForm, ForgotPasswordChangeForm
+from app.auth.forms import RegisterForm, LoginForm, PasswordUpdateForm, ForgotPasswordEmailForm, ForgotPasswordChangeForm, ChangeEmailForm
 from ..models import User
 from app import db
 from ..emails import send_email
@@ -99,6 +99,8 @@ def resend_confirmation():
 
 
 ####################### Account Management ############################### 
+
+################### Password Management ###################
 @auth.route('/update_password', methods=['GET', 'POST'])
 @login_required
 def update_password():
@@ -143,6 +145,42 @@ def change_password(email, token):
         return render_template('/auth/change_password.html', form=form, email=email, token=token)
     flash("Link is invalid or has expired")
     return redirect(url_for('auth.login'))
+
+##########################################################################
+
+
+
+
+######################### Email Management ###############################
+@auth.route('/update_email', methods=['GET', 'POST'])
+@login_required
+def change_email():
+    form = ChangeEmailForm()
+    user = User.query.filter_by(email=current_user.email).first()
+    if form.validate_on_submit():
+        token = user.generate_confirmation_token()
+        send_email(user.email, "Change Email", 'auth/email/change_email_email', user=user, email=form.new_email.data, token=token)
+        flash("A reset link has been sent to your email account")
+        return redirect(url_for('main.index'))
+    return render_template('auth/change_email.html', form=form)
+
+@auth.route('/confirm_email/<email>/<token>')
+@login_required
+def confirm_email(email, token):
+    user = User.query.filter_by(email=current_user.email).first()
+
+    if user.confirm(token):
+        user.email = email
+        db.session.add(user)
+        db.session.commit()
+        flash("Your email has been changed!")
+        return redirect(url_for('main.index'))
+    flash("Link is invalid or has expired")
+    return render_template(url_for('main.index'))
+    
+
+
+##########################################################################
 
 
 ##########################################################################
