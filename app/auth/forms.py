@@ -57,4 +57,13 @@ class ForgotPasswordChangeForm(FlaskForm):
 
 class ChangeEmailForm(FlaskForm):
     new_email = StringField('Email', validators=[Email(), DataRequired(), Length(1, 64)])
+    password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Change Email")
+
+    def validate_new_email(self, field):
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('This email is already registered')
+    
+    def validate_password(self, field):
+        if not current_user.verify_password(field.data):
+            raise ValidationError("Incorrect Password")
