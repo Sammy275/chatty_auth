@@ -11,6 +11,13 @@
       {% endfor %}
     </div>
 
+    <!-- Password field errors -->
+    <div class="errors">
+      {% for errors in form.password.errors %}
+      <div class="alert alert-danger" role="alert">{{ errors }}</div>
+      {% endfor %}
+    </div>
+
   <div class="form">
       <form method="POST" action="{{ url_for('auth.change_email') }}">
         {{ form.hidden_tag() }}
@@ -18,6 +25,11 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Your New Email</label>
             {{ form.new_email(class='form-control', id='exampleInputEmail1', placeholder='Enter your new email') }}
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          {{ form.password(class='form-control', id='exampleInputPassword1', placeholder='Enter your password') }}
         </div>
 
         <!-- <button type="submit" class="btn account-but">Sign Up</button> -->
