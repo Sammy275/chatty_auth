@@ -20,7 +20,6 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
     is_administrator = db.Column(db.Boolean, default=False)
-    # role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
 
 
     # Password setting
