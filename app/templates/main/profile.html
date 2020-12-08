@@ -1,70 +1,40 @@
 {% extends "base.html" %}
 {% block title %}
-    {% if not error %}
     {{ user.name }}
-    {% else %}
-    User not Found
-    {% endif %}
 {% endblock title %}
 {% block content %}
 <div class="container">
-    {% if not error %}
     <div class="user-detail">
+        {% if user == current_user %}<p class="mt-4 ml-4 d-inline"><a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Log Out</a></p>{% endif %}
         <div class="usr-img text-center mt-5">
             <img src="{{ url_for('static', filename='pic1.jpg') }}" class="rounded-circle" alt="User Pic" height="250", width="250">
+            {% if user.is_online %}
+                <p><div class="mr-2 online"></div>Online</p>
+            {% else %}
+                <p><div class="mr-2 offline"></div>Offline</p>
+            {% endif %}
         </div>
         <div class="username text-center mt-4">
             <h2>{{ user.name }}</h2>
         </div>
         <div class="additional-text">
-            <div class="additional-info text-center">
-                {% if user.additional_info %}
-                    <p>{{ user.additional_info }}</p>
-                {% endif %}
-            </div>
             <div class="detail mt-4 mb-4">
-                {% if user.location %}
-                    <p>Lives in {{ user.location }}</p>
-                {% endif %}
-
-                {% if user.age %}
-                    <p>I am {{ user.user_age }} years old</p>
-                {% endif %}
+                {% if user.location %}<p>From <a href="http://map.google.com/?q={{ user.location }}" target="_">{{ user.location }}</a></p>{% endif %}
             </div>
-            {% if not cur_session %}
-            <form action="#" method="POST">
-                <button type="submit" class="btn account-but">Add Friend</button>
-            </form>
-            {% endif %}
 
-            {% if friend_but %}
-            <form action="#" method="GET">
-                <button type="submit" class="btn account-but">Your Friends</button>
-            </form>
-            {% endif %}
+            <div class="detail mt-4 mb-4">
+                {% if user.age %}<p>{{ user.age }} years old</p>{% endif %}
+            </div>
 
-            <!-- If the user is a friend than display this -->
-            {% if if_friend %}
-            <div class="row">
-                <div class="col-md-6">
-                    <form action="{{ url_for('main.index') }}" method="GET">
-                        <button type="submit" class="btn account-but">Message</button>
-                    </form>
-                </div>
-                
-                <div class="col-md-6">
-                    <form action="#" method="POST">
-                        <button type="submit" class="btn btn-danger w-100">Unfriend</button>
-                    </form>
-                </div>
-            </div>  
-            {% endif %}
+            <div class="detail mt-4 mb-4">
+                {% if user.register_date %}<p>Registered on {{ moment(user.register_date).format('LL') }}</p>{% endif %}
+            </div>
+
+            <div class="additional-info text-center">
+                {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+            </div>
         </div>
     </div>
-    {% else %}
-    <h1>Error</h1>
-    <P>This user does not exist</P>
-    {% endif %}
 </div>
 
 {% endblock content %}

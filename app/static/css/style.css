@@ -153,6 +153,23 @@ hr {
     width:% !important;
 } */
 
+.online, .offline {
+    width: 10px;
+    height:10px; 
+    border-radius:50%; 
+    display: inline-block;
+}
+
+
+.online {
+    background-color:lime; 
+    box-shadow: 0px 0px 2px 2px lime;
+}
+.offline {
+    background-color:red; 
+    box-shadow: 0px 0px 2px 2px red;
+}
+
 @media (max-width: 768px) { 
     .side-nav {
         height: 100%;
