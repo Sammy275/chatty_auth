@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
     location = db.Column(db.String(64))
     about_me = db.Column(db.Text())
     register_date = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
-    last_seen = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
+    is_online = db.Column(db.Boolean, default=False)
 
 
     # Password setting
