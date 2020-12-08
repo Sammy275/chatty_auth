@@ -16,10 +16,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(64), unique=True, index=True)
     name = db.Column(db.String, nullable=True)
     age = db.Column(db.Integer, nullable=True)
-    register_date = db.Column(db.Date, default=datetime.date.today())
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
     is_administrator = db.Column(db.Boolean, default=False)
+    location = db.Column(db.String(64))
+    about_me = db.Column(db.Text())
+    register_date = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
+    last_seen = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
 
 
     # Password setting
