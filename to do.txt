@@ -1,3 +1,5 @@
 Navbar proper buttons rendering
 
 Use the unconfirmed route during chat authentication
+
+asdhj

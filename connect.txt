@@ -3,3 +3,5 @@ app=create_app('development')
 app.app_context().push()
 from app import db
 from app.models import User
+
+asd
