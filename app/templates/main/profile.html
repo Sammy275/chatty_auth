@@ -5,7 +5,11 @@
 {% block content %}
 <div class="container">
     <div class="user-detail">
-        {% if user == current_user %}<p class="mt-4 ml-4 d-inline"><a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Log Out</a></p>{% endif %}
+        {% if user == current_user %}
+            <p class="mt-4 ml-4 d-inline"><a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Log Out</a></p>
+            <p class="mr-4 float-right"><a class="btn btn-primary" href="{{ url_for('main.settings') }}">Settings</a></p>
+        {% endif %}
+
         <div class="usr-img text-center mt-5">
             <img src="{{ url_for('static', filename='pic1.jpg') }}" class="rounded-circle" alt="User Pic" height="250", width="250">
             {% if user.is_online %}
