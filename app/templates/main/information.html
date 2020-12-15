@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Information{% endblock title %}
+{% block nav %}{% endblock nav %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="errors">
+        {% for error in errors %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+        {% endfor %}
+      </div> 
+
+    <div class='banner'>
+    <h5>Update your Account Details</h5>
+    </div>
+
+    <div class="row mt-2">
+        <div style="background-color: #40c2ff; border-radius: 5px;" class="col-md-2 side-nav">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <h5 class="nav-link active">Side Navigation</h5>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="{{ url_for('main.profile', username=user.name) }}">Your Account</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.logout') }}">Log out</a>
+                  </li>
+            </ul>
+        </div>
+        <div class="col-md-9 mb-3">
+            <form method="POST" action="{{ url_for('main.index') }}" class="info-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input name="username" type="text" class="form-control" id="username" value="{{ user.username }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    {% if user.location %}
+                    <input name="location" type="text" class="form-control" id="username" value="{{ user.location }}">
+                    {% else %}
+                    <input name="location" type="text" class="form-control" id="username" value="" placeholder="Not given">
+                    {% endif %}
+                </div>
+                    
+                <div><label>Gender</label></div>
+                <div class="form-check form-check-inline mb-1">
+                    {% if user.gender == 0 %}
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="0" checked>
+                    {% else %}
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="0">
+                    {% endif %}
+                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    {% if user.gender == 1 %}
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="1" checked>
+                    {% else %}
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="1">
+                    {% endif %}
+                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    {% if user.gender == 2 %}
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="2" checked>
+                    {% else %}
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="2">
+                    {% endif %}
+                    <label class="form-check-label" for="inlineRadio3">Other</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    {% if user.age %}
+                    <input name="age" type="number" class="form-control" id="age" value="{{ user.age }}">
+                    {% else %}
+                    <input name="age" type="number" class="form-control" id="age" value="" placeholder="Not Given">
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">More about yourself</label>
+                    {% if user.additional_info %}
+                    <textarea name="additional-info" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ user.additional_info }}</textarea>
+                    {% else %}
+                    <textarea name="additional-info" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Not Given"></textarea>
+                    {% endif %}
+                  </div>
+                <button type="submit" class="btn account-but">Update Info</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
