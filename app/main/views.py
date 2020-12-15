@@ -1,10 +1,11 @@
 from flask import render_template, abort
+from flask_login import login_required, current_user
 from . import main
 from ..models import User
 
 @main.route('/')
 def index():
-    return render_template('main/index.html', session=False)
+    return render_template('main/index.html')
 
 @main.route('/about')
 def about():
@@ -16,3 +17,9 @@ def profile(username):
     if not user:
         abort(404)
     return render_template('main/profile.html', user=user)
+
+@main.route('/settings')
+@login_required
+def settings():
+    user = User.query.filter_by(email=current_user.email).first()
+    return render_template('main/information.html', user=user)
