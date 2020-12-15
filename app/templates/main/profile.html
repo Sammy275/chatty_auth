@@ -3,39 +3,45 @@
     {{ user.name }}
 {% endblock title %}
 {% block content %}
-<div class="container">
-    <div class="user-detail">
-        {% if user == current_user %}
-            <p class="mt-4 ml-4 d-inline"><a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Log Out</a></p>
-            <p class="mr-4 float-right"><a class="btn btn-primary" href="{{ url_for('main.settings') }}">Settings</a></p>
-        {% endif %}
-
-        <div class="usr-img text-center mt-5">
-            <img src="{{ url_for('static', filename='pic1.jpg') }}" class="rounded-circle" alt="User Pic" height="250", width="250">
-            {% if user.is_online %}
-                <p><div class="mr-2 online"></div>Online</p>
-            {% else %}
-                <p><div class="mr-2 offline"></div>Offline</p>
+<div class="container padding">
+    <div>
+        <div class="user-detail">
+            {% if user == current_user %}
+                <p class="mt-4 ml-4 d-inline"><a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Log Out</a></p>
+                <p class="mr-4 float-right"><a class="btn btn-primary" href="{{ url_for('main.settings') }}">Settings</a></p>
             {% endif %}
-        </div>
-        <div class="username text-center mt-4">
-            <h2>{{ user.name }}</h2>
-        </div>
-        <div class="additional-text">
-            <div class="detail mt-4 mb-4">
-                {% if user.location %}<p>From <a href="http://map.google.com/?q={{ user.location }}" target="_">{{ user.location }}</a></p>{% endif %}
-            </div>
 
-            <div class="detail mt-4 mb-4">
-                {% if user.age %}<p>{{ user.age }} years old</p>{% endif %}
+            <div class="usr-img text-center mt-5">
+                <img src="{{ url_for('static', filename='pic1.jpg') }}" class="rounded-circle" alt="User Pic" height="250", width="250">
+                {% if user.is_online %}
+                    <p><div class="mr-2 online"></div>Online</p>
+                {% else %}
+                    <p><div class="mr-2 offline"></div>Offline</p>
+                {% endif %}
             </div>
-
-            <div class="detail mt-4 mb-4">
-                {% if user.register_date %}<p>Registered on {{ moment(user.register_date).format('LL') }}</p>{% endif %}
+            <div class="username text-center mt-4">
+                <h2>{{ user.name }}</h2>
             </div>
 
             <div class="additional-info text-center">
                 {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+            </div>
+
+            <div class="additional-text">
+                <div class="additional-text-wrap">
+                    <h6>Additional Information</h6>
+                    <div class="detail mt-4 mb-4">
+                        {% if user.location %}<p>From <a href="http://map.google.com/?q={{ user.location }}" target="_">{{ user.location }}</a></p>{% endif %}
+                    </div>
+
+                    <div class="detail mt-4 mb-4">
+                        {% if user.age %}<p>{{ user.age }} years old</p>{% endif %}
+                    </div>
+
+                    <div class="detail mt-4 mb-4">
+                        {% if user.register_date %}<p>Registered on {{ moment(user.register_date).format('LL') }}</p>{% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

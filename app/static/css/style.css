@@ -94,25 +94,38 @@ hr {
     box-shadow: 10px;
 }
 
-.additional-text {
-    width: 50%;
-    margin: 20px auto;
+.padding {
+    padding: 10px 0px;
 }
 
+.additional-text {
+    width: 100%;
+    height: 100px;
+}
+
+
 .additional-text p {
-    line-height: 1;
-    font-size: 100;
+    line-height: 0.5;
+}
+
+.additional-text-wrap {
+    width: 40%;
+    margin: 0px auto;
+    padding: 10px;
+}
+
+.detail {
+    margin-bottom: 0px;
+}
+
+.detail p {
+    line-height: 1;   
+    font-size: 110%; 
+    color: #8f8f8f;
 }
 
 .additional-info {
     word-wrap: break-word;
-}
-
-.detail p {
-    line-height: 0.5;   
-    font-size: 110%;
-    color: #8f8f8f;
-    font-size: 100;
 }
 
 .friend-list {
