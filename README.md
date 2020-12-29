@@ -1,6 +1,6 @@
 # Chatty App
 
-This is a basic flask website. I have developed basic user authentication system.
+This is a basic flask website in which I have developed basic user authentication system.
 
 ## Technologies Used
 
