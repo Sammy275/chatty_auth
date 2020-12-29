@@ -4,3 +4,4 @@
 /debug.log
 /migrations
 /env
+__pycache__/
