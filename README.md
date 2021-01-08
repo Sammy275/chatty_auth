@@ -18,10 +18,11 @@ This is a basic flask website in which I have developed basic user authenticatio
 5. Set SQLALCHEMY_DATABASE_URI to your preferred database.
 6. Set SECRET_KEY environment variable.
 7. Type "flask db init" in your terminal
-8. Type 'flask db migrate -m "Databse migration"'.
+8. Type 'flask db migrate -m "Database migration"'.
 9. Type 'flask db upgrade'.
 10. Set FLASK_APP = manage.py
 11. Set FLASK_DEBUG = 1
-12. Type 'flask run'
-13. Open your browser and type 'localhost:5000' in search bar
-14. You are ready to go!
+12. Set SECRET_KEY environment variable.
+13. Type 'flask run'
+14. Open your browser and type 'localhost:5000' in search bar
+15. You are ready to go!
